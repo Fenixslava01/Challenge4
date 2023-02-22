@@ -1,21 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Matrix;
+using LifeGame;
 
-namespace Challenge4
-{
-    class Program
-    {
-        static void Main(string[] args)
-        {
+namespace Challenge4 {
+    class Program {
+        static void Main(string[] args) {
+            #region первое и второе задания
             Console.WriteLine("Введите количество строк: ");
             int x = int.Parse(Console.ReadLine());
             Console.WriteLine("Введите количество столбцов: ");
             int y = int.Parse(Console.ReadLine());
-
             var C = new MatrixController(x, y);
             int [,] matrixA = C.CreateMatrix();
             C.FillMatrix(matrixA);
@@ -29,6 +23,21 @@ namespace Challenge4
             C.SummMatrix(matrixA, matrixB, summaryMatrix);
             C.ShowMatrix(summaryMatrix);
             C.ShowSummAndExit(summaryMatrix);
+            #endregion
+
+            Console.Clear();
+
+            #region Задание 3
+            int runs = 0;
+            int h = 15;
+            int w = 15;
+            int MaxRuns = 100;
+            var sim = new LifeStim(h,w);
+            while (runs++ < MaxRuns) {
+                sim.DrawAndGrow();
+                System.Threading.Thread.Sleep(300);
+            }
+            #endregion  
         }
     }
 }
