@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Matrix;
 
 namespace Challenge4
 {
@@ -14,21 +15,20 @@ namespace Challenge4
             int x = int.Parse(Console.ReadLine());
             Console.WriteLine("Введите количество столбцов: ");
             int y = int.Parse(Console.ReadLine());
-            int summMatrix = 0;
-            int[,] matrix = new int[x,y];
-            Random rand = new Random();
-            for (int i = 0; i < x; i++)
-            {
-                for (int j = 0; j < y; j++)
-                {
-                    matrix[i, j] = rand.Next(0,50);
-                    Console.Write($"{matrix[i, j]} ");
-                    summMatrix += matrix[i, j];
-                }
-            }
-            Console.WriteLine($"summMatrix = {summMatrix}");
-            Console.WriteLine("Нажмите любую кнопку для выхода...");
-            Console.ReadKey();
+
+            var C = new MatrixController(x, y);
+            int [,] matrixA = C.CreateMatrix();
+            C.FillMatrix(matrixA);
+            C.ShowMatrix(matrixA);
+            C.ShowSummAndExit(matrixA);
+            int[,] matrixB = C.CreateMatrix();
+            C.FillMatrix(matrixB);
+            C.ShowMatrix(matrixB);
+            C.ShowSummAndExit(matrixB);
+            int[,] summaryMatrix = C.CreateMatrix();
+            C.SummMatrix(matrixA, matrixB, summaryMatrix);
+            C.ShowMatrix(summaryMatrix);
+            C.ShowSummAndExit(summaryMatrix);
         }
     }
 }
